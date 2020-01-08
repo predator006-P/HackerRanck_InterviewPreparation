@@ -27,9 +27,9 @@ class Solution
 
         /* Tömb rendezés */
 
-        Array.Sort(t_ar);
+        //Array.Sort(t_ar);
 
-        //t_ar = SortClass.QuickSort(ar, n);
+        t_ar = SortClass.QuickSort(ar, n);
 
 
         for (int i = 0; i < n; i++)

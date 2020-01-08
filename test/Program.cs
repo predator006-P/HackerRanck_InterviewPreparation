@@ -1,46 +1,74 @@
-﻿using System;
+﻿using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+using test;
 
-namespace test
+class Solution
 {
-    class Program
+
+    // Complete the sockMerchant function below.
+    static int SockMerchant(int n, int[] ar)
     {
-        protected byte Age;
-        static void Main(string[] args)
+        int[] t_ar = ar;
+        int pair_no = 0;
+        int t_pair_no = 1;
+        int tmp;
+
+
+        /* Tömb rendezés */
+
+        Array.Sort(t_ar);
+
+        //t_ar = SortClass.QuickSort(ar, n);
+
+
+        for (int i = 0; i < n; i++)
         {
-            Console.WriteLine("Hello");
-
-            myClass Person = new myClass("Béla");
-            Console.WriteLine($"Hello {Person.name}");
-
-            myClass Person2 = new myClass("Sanyi", 40);
-            Console.WriteLine($"Hello {Person2.name}");
-
-            string mi_a_fasz = "      Mi a fasz       ";
-            Console.WriteLine($"[{mi_a_fasz.ToUpper()}]");
-            Console.WriteLine($"[{mi_a_fasz.ToLower()}]");
-
-            mi_a_fasz = mi_a_fasz.Replace("fasz", "geci?");
-            Console.WriteLine($"[{mi_a_fasz}]");
+            Console.WriteLine(t_ar[i]);
         }
+
+        tmp = t_ar[0];
+        for (int i = 0; i < (n - 1); i++)
+        {
+
+            if (t_ar[i + 1] == tmp)
+            {
+                t_pair_no++;
+            }
+            else
+            {
+                pair_no += (t_pair_no / 2);
+                t_pair_no = 1;
+                tmp = t_ar[i + 1];
+            }
+        }
+        pair_no += (t_pair_no / 2);
+        return pair_no;
     }
 
-    class myClass: Program
+    static void Main(string[] args)
     {
-        public string name;
+        int a = 1 / 2;
+        Console.WriteLine($"a={a}");
+        int n = Convert.ToInt32(Console.ReadLine());
 
-        public myClass(string name)
-        {
-            this.name = name;
-            this.Age = 10;
-            Console.WriteLine($"{this.name} age is {this.Age}");
-            Console.WriteLine($"Length of this.name is {this.name.Length}");
-        }
+        int[] ar = Array.ConvertAll(Console.ReadLine().Split(' '), arTemp => Convert.ToInt32(arTemp));
+        
+        int result = SockMerchant(n, ar);
 
-        public myClass(string name, byte age)
-        {
-            this.name = name;
-            this.Age = age;
-            Console.WriteLine($"{this.name} age is {this.Age}");
-        }
+        Console.WriteLine();
+        Console.WriteLine(result);
+
+   
     }
 }
